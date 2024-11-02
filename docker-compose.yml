@@ -1,0 +1,12 @@
+version: '3'
+services:
+  web:
+    build: .
+    volumes:
+      - ./:/go/src/github.com/olendril/scalingo-test
+    environment:
+      - "GITHUB_ACCESS_TOKEN="
+    ports:
+      - "5000:5000"
+    command: reflex -r '\.go$$' -s -- sh -c 'go build -buildvcs=false && ./scalingo-test'
+    stop_signal: SIGKILL

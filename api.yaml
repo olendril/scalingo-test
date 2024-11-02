@@ -1,0 +1,82 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Scalingo Test
+paths:
+  /ping:
+    get:
+      responses:
+        '200':
+          description: ping response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pong'
+  /repos:
+    get:
+      parameters:
+        - in: query
+          name: language
+          required: false
+          description: The language to filter
+          schema:
+            type: string
+
+        - in: query
+          name: license
+          required: false
+          description: The license to filter
+          schema:
+            type: string
+
+      responses:
+        '200':
+          description: ping response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Repo'
+        '422':
+          description: Rate limiting reach or personal token revoked
+        '500':
+          description: Error when handling the request
+
+
+components:
+  schemas:
+    Pong:
+      type: object
+      required:
+        - ping
+      properties:
+        ping:
+          type: string
+          example: pong
+    Repo:
+      type: object
+      required:
+        - full_name
+        - owner
+        - repository
+        - languages
+      properties:
+        full_name:
+          type: string
+          example: FreeCodeCamp/FreeCodeCamp
+        owner:
+          type: string
+          example: FreeCodeCamp/FreeCodeCamp
+        repository:
+          type: string
+          example: FreeCodeCamp
+        languages:
+          type: object
+          additionalProperties:
+            type: object
+            required:
+              - bytes
+            properties:
+              bytes:
+                type: integer
