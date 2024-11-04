@@ -1,9 +1,5 @@
 # Canvas for Backend Technical Test at Scalingo
 
-## Instructions
-
-* From this canvas, respond to the project which has been communicated to you by our team
-* Feel free to change everything
 
 ## Execution
 
@@ -13,6 +9,8 @@ docker compose up
 
 Application will be then running on port `5000`
 
+The Env variable "GITHUB_ACCESS_TOKEN" can be set to use a personal access token to prevent api rate limiting issue
+
 ## Test
 
 ```
@@ -20,4 +18,6 @@ $ curl localhost:5000/ping
 { "status": "pong" }
 ```
 
-The [Documentation](./api.yaml) is availabe to use the service.
+The [Documentation](./api.yaml) is available to use the service.
+
+
